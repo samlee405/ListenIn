@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login Screen-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="logInScreenController" id="BYZ-38-t0r" userLabel="Login Screen" customClass="ViewController" customModule="ListenIn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +16,114 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqf-ig-jRH">
+                                <rect key="frame" x="180" y="269" width="240" height="46"/>
+                                <color key="backgroundColor" red="0.11764705882352941" green="0.84313725490196079" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="7Eh-sj-Qp0"/>
+                                    <constraint firstAttribute="height" constant="50" id="xdL-7q-ALp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                <state key="normal" title="SIGN INTO SPOTIFY">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signIntoSpotify:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rgL-4x-Lq3"/>
+                                    <segue destination="IAq-VE-v2w" kind="show" identifier="PlayListGeneratorSelectionSegue" id="VXY-7K-vye"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yqf-ig-jRH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="66r-WZ-Jbw"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yqf-ig-jRH" secondAttribute="bottom" constant="120" id="T9c-i8-iKt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logInButton" destination="yqf-ig-jRH" id="qvT-Xg-o4m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Playlist Generator Selection Screen-->
+        <scene sceneID="7p1-RL-adA">
+            <objects>
+                <viewController storyboardIdentifier="playlistGeneratorSelectionController" id="IAq-VE-v2w" userLabel="Playlist Generator Selection Screen" customClass="PlaylistGeneratorSelectionController" customModule="ListenIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="va4-tK-qu4"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mt3-qY-9qX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8ga-57-wOe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playlist Creation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MK8-kW-VOb">
+                                <rect key="frame" x="230" y="120" width="141" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="6jo-Ny-DDg"/>
+                                    <constraint firstAttribute="width" constant="141" id="AQN-As-KFc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <color key="textColor" red="0.29803921568627451" green="0.29803921568627451" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfw-W1-rd2">
+                                <rect key="frame" x="206" y="265" width="188" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Tx4-aV-7bs"/>
+                                    <constraint firstAttribute="width" constant="188" id="mxe-Bi-8j2"/>
+                                </constraints>
+                                <state key="normal" title="Autogenerate a playlist"/>
+                                <connections>
+                                    <action selector="autogeneratePlaylist:" destination="IAq-VE-v2w" eventType="touchUpInside" id="D5g-T3-O77"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9z7-la-J7D">
+                                <rect key="frame" x="206" y="377" width="188" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3iG-v8-B3G"/>
+                                    <constraint firstAttribute="width" constant="188" id="FUL-vj-XlM"/>
+                                </constraints>
+                                <state key="normal" title="Build your own playlist"/>
+                                <connections>
+                                    <action selector="manuallyGeneratePlaylist:" destination="IAq-VE-v2w" eventType="touchUpInside" id="ZW8-Uq-58U"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2x-b2-Kgd" userLabel="DividerBar">
+                                <rect key="frame" x="15" y="143" width="570" height="5"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="fSf-lO-FJ7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Y2x-b2-Kgd" firstAttribute="top" secondItem="MK8-kW-VOb" secondAttribute="bottom" constant="2" id="2aL-1Y-AMX"/>
+                            <constraint firstItem="Y2x-b2-Kgd" firstAttribute="leading" secondItem="8ga-57-wOe" secondAttribute="leading" constant="15" id="6qX-0d-wXn"/>
+                            <constraint firstItem="MK8-kW-VOb" firstAttribute="top" secondItem="va4-tK-qu4" secondAttribute="bottom" constant="100" id="B6t-o9-alp"/>
+                            <constraint firstItem="Y2x-b2-Kgd" firstAttribute="centerX" secondItem="MK8-kW-VOb" secondAttribute="centerX" id="NbJ-YF-lRc"/>
+                            <constraint firstItem="9z7-la-J7D" firstAttribute="centerX" secondItem="8ga-57-wOe" secondAttribute="centerX" id="PxT-ac-KF7"/>
+                            <constraint firstItem="9z7-la-J7D" firstAttribute="top" secondItem="Dfw-W1-rd2" secondAttribute="bottom" constant="82" id="WOP-C7-M0T"/>
+                            <constraint firstItem="Dfw-W1-rd2" firstAttribute="top" secondItem="Y2x-b2-Kgd" secondAttribute="bottom" constant="117" id="b3q-My-Cv1"/>
+                            <constraint firstItem="Dfw-W1-rd2" firstAttribute="centerX" secondItem="8ga-57-wOe" secondAttribute="centerX" id="cwu-Al-nJ0"/>
+                            <constraint firstItem="MK8-kW-VOb" firstAttribute="centerX" secondItem="8ga-57-wOe" secondAttribute="centerX" id="xfF-br-3QV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dividerBar" destination="Y2x-b2-Kgd" id="9KQ-gt-eub"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OcM-tG-9qq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1066" y="307"/>
         </scene>
     </scenes>
 </document>

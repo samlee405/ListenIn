@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF622DC01D36BC6700205419 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF622DBF1D36BC6700205419 /* Spotify.framework */; };
+		EF622DC91D3707F500205419 /* PlaylistGeneratorSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF622DC81D3707F500205419 /* PlaylistGeneratorSelectionController.swift */; };
 		EFDE0A901D359BC1008748F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0A8F1D359BC1008748F2 /* AppDelegate.swift */; };
 		EFDE0A921D359BC1008748F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0A911D359BC1008748F2 /* ViewController.swift */; };
 		EFDE0A951D359BC1008748F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDE0A931D359BC1008748F2 /* Main.storyboard */; };
 		EFDE0A971D359BC1008748F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFDE0A961D359BC1008748F2 /* Assets.xcassets */; };
 		EFDE0A9A1D359BC1008748F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDE0A981D359BC1008748F2 /* LaunchScreen.storyboard */; };
+		EFDE0AA51D35B246008748F2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFDE0AA41D35B246008748F2 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF622DBF1D36BC6700205419 /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Spotify.framework; sourceTree = "<group>"; };
+		EF622DC41D36BCD900205419 /* ListenIn-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ListenIn-Bridging-Header.h"; sourceTree = "<group>"; };
+		EF622DC81D3707F500205419 /* PlaylistGeneratorSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistGeneratorSelectionController.swift; sourceTree = "<group>"; };
 		EFDE0A8C1D359BC1008748F2 /* ListenIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListenIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFDE0A8F1D359BC1008748F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFDE0A911D359BC1008748F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +28,7 @@
 		EFDE0A961D359BC1008748F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFDE0A991D359BC1008748F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFDE0A9B1D359BC1008748F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFDE0AA41D35B246008748F2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,12 +36,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFDE0AA51D35B246008748F2 /* AVFoundation.framework in Frameworks */,
+				EF622DC01D36BC6700205419 /* Spotify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF622DC51D37079500205419 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF622DC41D36BCD900205419 /* ListenIn-Bridging-Header.h */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
 		EFDE0A831D359BC0008748F2 = {
 			isa = PBXGroup;
 			children = (
@@ -56,12 +73,24 @@
 			children = (
 				EFDE0A8F1D359BC1008748F2 /* AppDelegate.swift */,
 				EFDE0A911D359BC1008748F2 /* ViewController.swift */,
+				EF622DC81D3707F500205419 /* PlaylistGeneratorSelectionController.swift */,
 				EFDE0A931D359BC1008748F2 /* Main.storyboard */,
 				EFDE0A961D359BC1008748F2 /* Assets.xcassets */,
 				EFDE0A981D359BC1008748F2 /* LaunchScreen.storyboard */,
 				EFDE0A9B1D359BC1008748F2 /* Info.plist */,
+				EFDE0AA11D359C95008748F2 /* Frameworks */,
+				EF622DC51D37079500205419 /* Support Files */,
 			);
 			path = ListenIn;
+			sourceTree = "<group>";
+		};
+		EFDE0AA11D359C95008748F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF622DBF1D36BC6700205419 /* Spotify.framework */,
+				EFDE0AA41D35B246008748F2 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFDE0A921D359BC1008748F2 /* ViewController.swift in Sources */,
+				EF622DC91D3707F500205419 /* PlaylistGeneratorSelectionController.swift in Sources */,
 				EFDE0A901D359BC1008748F2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +233,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -241,6 +273,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -249,10 +283,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ListenIn",
+				);
 				INFOPLIST_FILE = ListenIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.samL.ListenIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ListenIn/ListenIn-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -260,10 +301,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ListenIn",
+				);
 				INFOPLIST_FILE = ListenIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.samL.ListenIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ListenIn/ListenIn-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -286,6 +334,7 @@
 				EFDE0AA01D359BC1008748F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,16 +8,68 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, SPTAuthViewDelegate {
+    
+    let kClientID = "be6510d70bda4a288b2725ff06c4b2e3"
+    let kCallbackURL = "listenin://callback"
+    
+    let spotifyAuthenticator = SPTAuth.defaultInstance()
+    var loginSession = SPTSession()
+    
+    @IBOutlet weak var logInButton: UIButton!
+    
+    @IBAction func signIntoSpotify(sender: AnyObject) {
+        
+        // Pass through authentication details
+        spotifyAuthenticator.clientID = kClientID
+        spotifyAuthenticator.requestedScopes = [SPTAuthPlaylistModifyPublicScope, SPTAuthUserFollowReadScope, SPTAuthUserLibraryReadScope]
+        spotifyAuthenticator.redirectURL = NSURL(string: kCallbackURL)
+        
+        // Create and prepare to open the Spotify log in controller
+        let spotifyAuthenticationViewController = SPTAuthViewController.authenticationViewController()
+        spotifyAuthenticationViewController.delegate = self
+
+        spotifyAuthenticationViewController.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
+        spotifyAuthenticationViewController.definesPresentationContext = true
+        
+        presentViewController(spotifyAuthenticationViewController, animated: false, completion: nil)
+    }
+    
+    // If login succeeds:
+    func authenticationViewController(authenticationViewController: SPTAuthViewController!, didLoginWithSession session: SPTSession!) {
+        
+        self.loginSession = session
+        self.performSegueWithIdentifier("PlaylistGeneratorSelectionSegue", sender: self)
+    }
+    
+    // If login fails:
+    func authenticationViewController(authenticationViewController: SPTAuthViewController!, didFailToLogin error: NSError!) {
+        print("Login failed... \(error)")
+    }
+    
+    // If login is cancelled:
+    func authenticationViewControllerDidCancelLogin(authenticationViewController: SPTAuthViewController!) {
+        print("Did Cancel Login...")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PlaylistGeneratorSelectionSegue" {
+            
+            let destinationViewController: PlaylistGeneratorSelectionController = segue.destinationViewController as! PlaylistGeneratorSelectionController
+            
+            // Send current Spotify session
+            destinationViewController.currentSession = loginSession
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        logInButton.layer.cornerRadius = 25
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
