@@ -83,6 +83,7 @@
                                 <state key="normal" title="Autogenerate a playlist"/>
                                 <connections>
                                     <action selector="autogeneratePlaylist:" destination="IAq-VE-v2w" eventType="touchUpInside" id="D5g-T3-O77"/>
+                                    <segue destination="Unc-d6-MgN" kind="show" id="X1k-Jc-3de"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9z7-la-J7D">
@@ -124,6 +125,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OcM-tG-9qq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1066" y="307"/>
+        </scene>
+        <!--A-PlaylistViewer-->
+        <scene sceneID="3cd-Kl-wSN">
+            <objects>
+                <tableViewController id="Unc-d6-MgN" userLabel="A-PlaylistViewer" customClass="PlaylistAutoGenerator" customModule="ListenIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gvm-K7-FGP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cCA-8T-Z61">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cCA-8T-Z61" id="o6x-a1-XGN">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Unc-d6-MgN" id="YHP-E4-Aye"/>
+                            <outlet property="delegate" destination="Unc-d6-MgN" id="joc-EU-EsY"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tz7-Bf-01H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1960" y="42"/>
         </scene>
     </scenes>
 </document>
