@@ -33,12 +33,14 @@ class ViewController: UIViewController, SPTAuthViewDelegate {
         spotifyAuthenticationViewController.definesPresentationContext = true
         
         presentViewController(spotifyAuthenticationViewController, animated: false, completion: nil)
+        
     }
     
     // If login succeeds:
     func authenticationViewController(authenticationViewController: SPTAuthViewController!, didLoginWithSession session: SPTSession!) {
         
         self.loginSession = session
+        print(self.description)
         self.performSegueWithIdentifier("PlaylistGeneratorSelectionSegue", sender: self)
     }
     

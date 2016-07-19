@@ -35,7 +35,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="signIntoSpotify:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rgL-4x-Lq3"/>
-                                    <segue destination="IAq-VE-v2w" kind="show" identifier="PlayListGeneratorSelectionSegue" id="VXY-7K-vye"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -47,6 +46,7 @@
                     </view>
                     <connections>
                         <outlet property="logInButton" destination="yqf-ig-jRH" id="qvT-Xg-o4m"/>
+                        <segue destination="IAq-VE-v2w" kind="show" identifier="PlaylistGeneratorSelectionSegue" id="e6I-4C-xT0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -83,7 +83,7 @@
                                 <state key="normal" title="Autogenerate a playlist"/>
                                 <connections>
                                     <action selector="autogeneratePlaylist:" destination="IAq-VE-v2w" eventType="touchUpInside" id="D5g-T3-O77"/>
-                                    <segue destination="Unc-d6-MgN" kind="show" id="X1k-Jc-3de"/>
+                                    <segue destination="Unc-d6-MgN" kind="show" id="EXw-c0-7gB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9z7-la-J7D">

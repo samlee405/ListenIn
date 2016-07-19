@@ -8,14 +8,63 @@
 
 import Foundation
 
+
 class SongScraper {
     
-    func findSongs(numberOfSongs: Int, spotifyAccount: String, session: SPTSession) {
-        
-        SPTPlaylistList.playlistsForUser(spotifyAccount, withSession: session, callback: nil)
-        
-        for playlists in STPPlaylistList {
+  
+    
+    var str: String = ""
+    
+    static func getSongsFromPlaylist(spotifyAccount: String, session: SPTSession, numberOfSongs: Int, completionHandler: (songs:[NSURL]) -> Void) {
+
+        SPTPlaylistList.playlistsForUser(spotifyAccount, withSession: session) { (error: NSError!, data: AnyObject!) in
             
+            let playlists = data as! SPTPlaylistList
+            let random = Int(arc4random_uniform(UInt32(playlists.items.count)))
+            let playlist = playlists.items[random] as! SPTPartialPlaylist
+            var songs:[NSURL] = [NSURL]()
+            
+            for _ in 1...numberOfSongs {
+                SPTPlaylistSnapshot.playlistWithURI(playlist.uri, session: session) { (error: NSError!, data: AnyObject!) in
+                
+                let playlistViewer = data as! SPTPlaylistSnapshot
+                let playlist = playlistViewer.firstTrackPage
+                let random = Int(arc4random_uniform(UInt32(playlist.items.count)))
+                //PlaylistGeneratorSelectionController.aSongs.append(playlist.items[random].uri)
+                songs.append(playlist.items[random].uri)
+                }
+            }
         }
     }
+    
+
 }
+
+
+
+
+
+//func findPlaylists(spotifyAccount: String, session: SPTSession, callback: (NSURL -> ())) {
+//    
+//    SPTPlaylistList.playlistsForUser(spotifyAccount, withSession: session) { (error: NSError!, data: AnyObject!) in
+//        
+//        let playlists = data as! SPTPlaylistList
+//        
+//        let random = Int(arc4random_uniform(UInt32(playlists.items.count)))
+//        
+//        let playlist = playlists.items[random] as! SPTPartialPlaylist
+//        callback(playlist.uri)
+//    }
+//}
+//
+//func getSongs(uri: String, numberOfSongs: Int, session: SPTSession) {
+//    
+//    SPTPlaylistSnapshot.playlistWithURI(NSURL(string: uri), session: session) { (error: NSError!, data: AnyObject!) in
+//        let playlistViewer = data as! SPTPlaylistSnapshot
+//        let playlist = playlistViewer.firstTrackPage
+//        
+//        // need to use numberOfSongs and randomly select that many songs from
+//        
+//        print(playlist.items[0])
+//    }
+//}
