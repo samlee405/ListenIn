@@ -40,32 +40,3 @@ class SongScraper {
         }
     }
 }
-
-
-
-
-
-//func findPlaylists(spotifyAccount: String, session: SPTSession, callback: (NSURL -> ())) {
-//    
-//    SPTPlaylistList.playlistsForUser(spotifyAccount, withSession: session) { (error: NSError!, data: AnyObject!) in
-//        
-//        let playlists = data as! SPTPlaylistList
-//        
-//        let random = Int(arc4random_uniform(UInt32(playlists.items.count)))
-//        
-//        let playlist = playlists.items[random] as! SPTPartialPlaylist
-//        callback(playlist.uri)
-//    }
-//}
-//
-//func getSongs(uri: String, numberOfSongs: Int, session: SPTSession) {
-//    
-//    SPTPlaylistSnapshot.playlistWithURI(NSURL(string: uri), session: session) { (error: NSError!, data: AnyObject!) in
-//        let playlistViewer = data as! SPTPlaylistSnapshot
-//        let playlist = playlistViewer.firstTrackPage
-//        
-//        // need to use numberOfSongs and randomly select that many songs from
-//        
-//        print(playlist.items[0])
-//    }
-//}

@@ -14,8 +14,6 @@ class PlaylistAutoGenerator: UITableViewController {
     var currentSession: SPTSession?
     var data:[NSURL] = [NSURL]()
     
-//    var songCells = [PlaylistTableViewCell]()
-    
     override func viewDidLoad() {
         
         print("Entered view did load")
@@ -27,7 +25,6 @@ class PlaylistAutoGenerator: UITableViewController {
                 print("songs: \(songs)")
                 
                 self.data = songs
-//                self.loadSongs()
                 self.tableView.reloadData()
                 
                 print("Finished loading songs")
@@ -38,17 +35,6 @@ class PlaylistAutoGenerator: UITableViewController {
         }
     }
     
-//    func loadSongs() {
-//        
-//        for uri in data {
-//            
-//            let song = PlaylistTableViewCell()
-//            song.songName = String(uri)
-//
-//            songCells.append(song)
-//        }
-//    }
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -56,7 +42,6 @@ class PlaylistAutoGenerator: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
