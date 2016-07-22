@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07F48B980A871A83EE223E28 /* Pods_ListenIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7C8203EE44DDF40CBC2DF00 /* Pods_ListenIn.framework */; };
 		EF09B4581D3D45C3008251A2 /* SongScraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09B4571D3D45C3008251A2 /* SongScraper.swift */; };
 		EF09B45A1D3D51E4008251A2 /* PlaylistAutoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF09B4591D3D51E4008251A2 /* PlaylistAutoGenerator.swift */; };
 		EF622DC01D36BC6700205419 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF622DBF1D36BC6700205419 /* Spotify.framework */; };
@@ -18,9 +19,13 @@
 		EFDE0A9A1D359BC1008748F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFDE0A981D359BC1008748F2 /* LaunchScreen.storyboard */; };
 		EFDE0AA51D35B246008748F2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFDE0AA41D35B246008748F2 /* AVFoundation.framework */; };
 		EFF387671D3EE89A003BE237 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF387661D3EE89A003BE237 /* PlaylistTableViewCell.swift */; };
+		EFFDD9451D42884700768DF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFFDD9441D42884700768DF2 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		33E8BDF9B4CDED24E57D8C5F /* Pods-ListenIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListenIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-ListenIn/Pods-ListenIn.release.xcconfig"; sourceTree = "<group>"; };
+		9A318E2943C515063B8DC3DD /* Pods-ListenIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListenIn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ListenIn/Pods-ListenIn.debug.xcconfig"; sourceTree = "<group>"; };
+		E7C8203EE44DDF40CBC2DF00 /* Pods_ListenIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ListenIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF09B4571D3D45C3008251A2 /* SongScraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongScraper.swift; path = ListenIn/SongScraper.swift; sourceTree = "<group>"; };
 		EF09B4591D3D51E4008251A2 /* PlaylistAutoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistAutoGenerator.swift; sourceTree = "<group>"; };
 		EF622DBF1D36BC6700205419 /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Spotify.framework; sourceTree = "<group>"; };
@@ -35,6 +40,7 @@
 		EFDE0A9B1D359BC1008748F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFDE0AA41D35B246008748F2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EFF387661D3EE89A003BE237 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
+		EFFDD9441D42884700768DF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,12 +50,30 @@
 			files = (
 				EFDE0AA51D35B246008748F2 /* AVFoundation.framework in Frameworks */,
 				EF622DC01D36BC6700205419 /* Spotify.framework in Frameworks */,
+				07F48B980A871A83EE223E28 /* Pods_ListenIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7EB3F2B118B9FBA621A687FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7C8203EE44DDF40CBC2DF00 /* Pods_ListenIn.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C7042208C6CD9435313967F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A318E2943C515063B8DC3DD /* Pods-ListenIn.debug.xcconfig */,
+				33E8BDF9B4CDED24E57D8C5F /* Pods-ListenIn.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EF09B4561D3D4546008251A2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +96,8 @@
 			children = (
 				EFDE0A8E1D359BC1008748F2 /* ListenIn */,
 				EFDE0A8D1D359BC1008748F2 /* Products */,
+				9C7042208C6CD9435313967F /* Pods */,
+				7EB3F2B118B9FBA621A687FC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +122,7 @@
 				EFDE0A961D359BC1008748F2 /* Assets.xcassets */,
 				EFDE0A981D359BC1008748F2 /* LaunchScreen.storyboard */,
 				EFDE0A9B1D359BC1008748F2 /* Info.plist */,
+				EFFDD9441D42884700768DF2 /* GoogleService-Info.plist */,
 				EFDE0AA11D359C95008748F2 /* Frameworks */,
 				EF622DC51D37079500205419 /* Support Files */,
 			);
@@ -118,9 +145,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFDE0A9E1D359BC1008748F2 /* Build configuration list for PBXNativeTarget "ListenIn" */;
 			buildPhases = (
+				C09496A4030C9D41BC5E3831 /* [CP] Check Pods Manifest.lock */,
 				EFDE0A881D359BC1008748F2 /* Sources */,
 				EFDE0A891D359BC1008748F2 /* Frameworks */,
 				EFDE0A8A1D359BC1008748F2 /* Resources */,
+				EB7C0665614A0C93D2D4F457 /* [CP] Embed Pods Frameworks */,
+				5197F133A01EC4D3D5166C13 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,12 +200,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFDE0A9A1D359BC1008748F2 /* LaunchScreen.storyboard in Resources */,
+				EFFDD9451D42884700768DF2 /* GoogleService-Info.plist in Resources */,
 				EFDE0A971D359BC1008748F2 /* Assets.xcassets in Resources */,
 				EFDE0A951D359BC1008748F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5197F133A01EC4D3D5166C13 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ListenIn/Pods-ListenIn-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C09496A4030C9D41BC5E3831 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EB7C0665614A0C93D2D4F457 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ListenIn/Pods-ListenIn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EFDE0A881D359BC1008748F2 /* Sources */ = {
@@ -302,6 +381,7 @@
 		};
 		EFDE0A9F1D359BC1008748F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A318E2943C515063B8DC3DD /* Pods-ListenIn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -320,6 +400,7 @@
 		};
 		EFDE0AA01D359BC1008748F2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33E8BDF9B4CDED24E57D8C5F /* Pods-ListenIn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
