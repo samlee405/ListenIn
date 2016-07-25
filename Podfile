@@ -8,5 +8,7 @@ target 'ListenIn' do
 
   # Pods for ListenIn
   pod 'Firebase'
+  pod 'Firebase/Database'
+  pod 'Firebase/Auth'
 
 end
