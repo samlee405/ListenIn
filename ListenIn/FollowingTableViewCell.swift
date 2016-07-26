@@ -10,4 +10,6 @@ import Foundation
 
 class FollowingTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var followedUser: UILabel!
+    
 }

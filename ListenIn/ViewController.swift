@@ -56,10 +56,8 @@ class ViewController: UIViewController, SPTAuthViewDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "PlaylistGeneratorSelectionSegue" {
-            
-            let destinationViewController: PlaylistGeneratorSelectionController = segue.destinationViewController as! PlaylistGeneratorSelectionController
-            
             // Send current Spotify session
+            let destinationViewController: PlaylistGeneratorSelectionController = segue.destinationViewController as! PlaylistGeneratorSelectionController
             destinationViewController.currentSession = loginSession
         }
     }

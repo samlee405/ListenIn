@@ -10,11 +10,6 @@ import Foundation
 
 class PlaylistTableViewCell: UITableViewCell {
     
-    var songName: String = ""
-    
     @IBOutlet weak var songTitle: UILabel!
-    
-//    init(name: String) {
-//        self.songName = name
-//    }
+
 }

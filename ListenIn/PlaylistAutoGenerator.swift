@@ -15,6 +15,7 @@ class PlaylistAutoGenerator: UITableViewController {
     var data:[NSURL] = [NSURL]()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         print("Entered view did load")
         
@@ -46,7 +47,7 @@ class PlaylistAutoGenerator: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistTableViewCell", forIndexPath: indexPath) as! PlaylistTableViewCell
-        print("loading data:")
+
         let song = data[indexPath.row]
         cell.songTitle.text = String(song)
         
