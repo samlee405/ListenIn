@@ -15,7 +15,7 @@ class PlaylistAutoGenerator: UITableViewController {
     var currentSession: SPTSession?
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
     var followedUsers: [String] = []
-    var data:[NSURL] = [NSURL]()
+    var data: [SPTPartialTrack] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,21 +29,25 @@ class PlaylistAutoGenerator: UITableViewController {
             }
             
             self.buildPlaylist()
-            
         }) { (error) in
             print(error.localizedDescription)
         }
     }
     
     func buildPlaylist() {
-        if let unwrappedSession = currentSession {
-            SongScraper.getSongsFromPlaylist("128153085", session: unwrappedSession, numberOfSongs: 2) { (songs) in
-                self.data = songs
-                self.tableView.reloadData()
+        for item in followedUsers {
+            let username = item.componentsSeparatedByString(":").last!
+            
+            if let unwrappedSession = currentSession {
+                SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 4) { (songs) in
+                    self.data = self.data + songs
+                    self.tableView.reloadData()
+                    print("there are \(self.data.count) songs")
+                }
             }
-        }
-        else {
-            print("Did not load session")
+            else {
+                print("Did not load session")
+            }
         }
     }
     
@@ -59,7 +63,7 @@ class PlaylistAutoGenerator: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistTableViewCell", forIndexPath: indexPath) as! PlaylistTableViewCell
 
-        let song = data[indexPath.row]
+        let song = data[indexPath.row].name
         cell.songTitle.text = String(song)
         
         return cell
