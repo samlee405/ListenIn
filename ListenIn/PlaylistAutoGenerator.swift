@@ -8,18 +8,36 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
 
 class PlaylistAutoGenerator: UITableViewController {
     
     var currentSession: SPTSession?
+    var ref: FIRDatabaseReference = FIRDatabase.database().reference()
+    var followedUsers: [String] = []
     var data:[NSURL] = [NSURL]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getFollowers()
+    }
+    
+    func getFollowers() {
+        ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            for entry in snapshot.children {
+                self.followedUsers.append(entry.value)
+            }
+            
+            self.buildPlaylist()
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func buildPlaylist() {
         if let unwrappedSession = currentSession {
             SongScraper.getSongsFromPlaylist("128153085", session: unwrappedSession, numberOfSongs: 2) { (songs) in
-                
                 self.data = songs
                 self.tableView.reloadData()
             }

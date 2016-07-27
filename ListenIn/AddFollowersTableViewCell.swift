@@ -19,6 +19,6 @@ class AddFollowersTableViewCell: UITableViewCell {
     @IBAction func followUser(sender: AnyObject) {
         
         let userToFollow = self.ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).childByAutoId()
-        userToFollow.setValue(someUser.text)
+        userToFollow.setValue(userURI)
     }
 }

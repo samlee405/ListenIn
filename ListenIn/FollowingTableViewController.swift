@@ -25,11 +25,8 @@ class FollowingTableViewController: UITableViewController {
             self.followingArray.append(entry.value)
             self.tableView.reloadData()
         }
-            
         }) { (error) in
-            
             print(error.localizedDescription)
-            self.tableView.reloadData()
         }
     }
     

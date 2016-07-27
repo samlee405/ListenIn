@@ -20,52 +20,63 @@ class AddFollowersTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Populate table view with users I'm not following
+        getUnfollowedUsers()
+    }
+    
+    func getUnfollowedUsers() {
         ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-            
-            for entry in snapshot.children {
-                self.usersImFollowing.append(entry.value)
-                self.tableView.reloadData()
-            }
-            
-            self.ref.child("users").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                
-                for anEntry in snapshot.children {
-                    
-                    let entry = anEntry as! FIRDataSnapshot
-                    self.isFollowed = false
-                    
-                    for follower in self.usersImFollowing {
-                        if follower == entry.key {
-                            self.isFollowed = true
-                        }
-                    }
-                    
-                    if !self.isFollowed {
-                        self.usersNotFollowing.append(entry.key)
-//                        SPTUser.requestUser(entry.key, withAccessToken: SPTAuth.defaultInstance().session.accessToken) { (error: NSError!, data: AnyObject!) in
-//                            self.usersNotFollowingDisplayName.append(data as! (String))
-//                        }
-                    }
-                }
-                
-                print("\npopulating usersNotFollowingDisplayName")
-                
-                for entry in self.usersNotFollowing {
-                    SPTUser.requestUser(entry, withAccessToken: SPTAuth.defaultInstance().session.accessToken) { (error: NSError!, data: AnyObject!) in
-                        self.usersNotFollowingDisplayName.append(data as! String)
-                        print(self.usersNotFollowingDisplayName.count)
-                    }
-                }
-                
-                self.tableView.reloadData()
-                
-            }) { (error) in
-                print(error.localizedDescription)
-            }
+            self.getFollowedUsersForUser(snapshot)
+            self.createListOfUnfollowedUsers()
         }) { (error) in
             print(error.localizedDescription)
+        }
+    }
+    
+    func getFollowedUsersForUser(snapshot: FIRDataSnapshot) {
+        for entry in snapshot.children {
+            self.usersImFollowing.append(entry.value)
+        }
+    }
+    
+    func createListOfUnfollowedUsers() {
+        self.ref.child("users").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            self.filterOutFollowedUsers(snapshot)
+            self.displayUsernames()
+            self.tableView.reloadData()
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func filterOutFollowedUsers(snapshot:FIRDataSnapshot) {
+        for anEntry in snapshot.children {
+            let entry = anEntry as! FIRDataSnapshot
+            self.isFollowed = false
+            
+            for follower in self.usersImFollowing {
+                if follower == entry.key {
+                    self.isFollowed = true
+                }
+            }
+            
+            if !self.isFollowed {
+                self.usersNotFollowing.append(entry.key)
+            }
+        }
+    }
+    
+    func displayUsernames() {
+        for entry in self.usersNotFollowing {
+            print(entry)
+            let username = entry.componentsSeparatedByString(":").last!
+            SPTUser.requestUser(username, withAccessToken: SPTAuth.defaultInstance().session.accessToken) { (error: NSError!, data: AnyObject!) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                self.usersNotFollowingDisplayName.append(data.displayName)
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -74,7 +85,7 @@ class AddFollowersTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usersNotFollowing.count
+        return usersNotFollowingDisplayName.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -83,12 +94,9 @@ class AddFollowersTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AddFollowersTableViewCell", forIndexPath: indexPath) as! AddFollowersTableViewCell
         
-        print(usersNotFollowing)
-        print(usersNotFollowing.count)
-        print(self.usersNotFollowingDisplayName.count)
-        
         let someUser = usersNotFollowingDisplayName[indexPath.row]
         cell.someUser.text = String(someUser)
+        cell.userURI = usersNotFollowing[indexPath.row]
         
         return cell
     }
