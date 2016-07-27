@@ -17,18 +17,11 @@ class PlaylistAutoGenerator: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Entered view did load")
-        
         if let unwrappedSession = currentSession {
             SongScraper.getSongsFromPlaylist("128153085", session: unwrappedSession, numberOfSongs: 2) { (songs) in
                 
-                print("entered callback")
-                print("songs: \(songs)")
-                
                 self.data = songs
                 self.tableView.reloadData()
-                
-                print("Finished loading songs")
             }
         }
         else {

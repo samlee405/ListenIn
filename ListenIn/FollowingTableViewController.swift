@@ -21,7 +21,6 @@ class FollowingTableViewController: UITableViewController {
         // Find all the people you're following
         ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
 
-//            self.followingArray = snapshot as! [Dictionary<String, String>]
         for entry in snapshot.children {
             self.followingArray.append(entry.value)
             self.tableView.reloadData()
