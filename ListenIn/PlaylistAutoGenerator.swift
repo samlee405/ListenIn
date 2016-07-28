@@ -10,17 +10,48 @@ import Foundation
 import UIKit
 import FirebaseDatabase
 
-class PlaylistAutoGenerator: UITableViewController {
+class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var currentSession: SPTSession?
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
     var followedUsers: [String] = []
     var data: [SPTPartialTrack] = []
+    let currentUserID = PlaylistGeneratorSelectionController.currentUserID
+    let currentUserURI = PlaylistGeneratorSelectionController.currentUserURI.componentsSeparatedByString(":").last!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBAction func uploadPlaylist(sender: AnyObject) {
+        SPTPlaylistList.createPlaylistWithName("Your ListenIn Playlist", publicFlag: true, session: currentSession) { (error: NSError!, data: SPTPlaylistSnapshot!) in
+            data.addTracksToPlaylist(self.data, withSession: self.currentSession, callback: { (error: NSError!) in
+                if let someError = error {
+                    print("Error uploading playlist")
+                    print(someError)
+                }
+            })
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getFollowers()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
+    
+    // Make this into a button's IBAction later
+//    func uploadPlaylist() {
+//        
+//        SPTPlaylistList.createPlaylistWithName(currentUserURI, publicFlag: true, session: currentSession) { (error: NSError!, data: SPTPlaylistSnapshot!) in
+//            data.addTracksToPlaylist(self.data, withSession: self.currentSession, callback: { (error: NSError!) in
+//                if let someError = error {
+//                    print("Error uploading playlist")
+//                    print(someError)
+//                }
+//            })
+//        }
+//    }
     
     func getFollowers() {
         ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
@@ -51,15 +82,15 @@ class PlaylistAutoGenerator: UITableViewController {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistTableViewCell", forIndexPath: indexPath) as! PlaylistTableViewCell
 

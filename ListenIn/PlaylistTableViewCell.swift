@@ -12,4 +12,5 @@ class PlaylistTableViewCell: UITableViewCell {
     
     @IBOutlet weak var songTitle: UILabel!
 
+    
 }
