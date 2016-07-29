@@ -40,19 +40,6 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
     }
     
-    // Make this into a button's IBAction later
-//    func uploadPlaylist() {
-//        
-//        SPTPlaylistList.createPlaylistWithName(currentUserURI, publicFlag: true, session: currentSession) { (error: NSError!, data: SPTPlaylistSnapshot!) in
-//            data.addTracksToPlaylist(self.data, withSession: self.currentSession, callback: { (error: NSError!) in
-//                if let someError = error {
-//                    print("Error uploading playlist")
-//                    print(someError)
-//                }
-//            })
-//        }
-//    }
-    
     func getFollowers() {
         ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             for entry in snapshot.children {
@@ -70,10 +57,17 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
             let username = item.componentsSeparatedByString(":").last!
             
             if let unwrappedSession = currentSession {
-                SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 4) { (songs) in
+                SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator") { (songs) in
                     self.data = self.data + songs
                     self.tableView.reloadData()
                     print("there are \(self.data.count) songs")
+                }
+                while SongScraper.playlistHasSongs == false {
+                    SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator") { (songs) in
+                        self.data = self.data + songs
+                        self.tableView.reloadData()
+                        print("there are \(self.data.count) songs")
+                    }
                 }
             }
             else {

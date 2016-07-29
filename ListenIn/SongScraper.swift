@@ -8,10 +8,13 @@
 
 import Foundation
 
-
 class SongScraper {
     
-    static func getSongsFromPlaylist(spotifyAccount: String, session: SPTSession, numberOfSongs: Int, completionHandler: (songs: [SPTPartialTrack]) -> Void) {
+    static var playlistHasSongs = true
+    
+    static func getSongsFromPlaylist(spotifyAccount: String, session: SPTSession, numberOfSongs: Int, locationOfCall: String, completionHandler: (songs: [SPTPartialTrack]) -> Void) {
+        
+        SongScraper.playlistHasSongs = true
 
         SPTPlaylistList.playlistsForUser(spotifyAccount, withSession: session) { (error: NSError!, data: AnyObject!) in
             
@@ -26,13 +29,24 @@ class SongScraper {
                 let playlistViewer = data as! SPTPlaylistSnapshot
                 let playlist = playlistViewer.firstTrackPage
                 
-                for i in 1...numberOfSongs {
-                    let random = Int(arc4random_uniform(UInt32(playlist.items.count)))
-                    songs.append(playlist.items[random] as! SPTPartialTrack)
-                
-                    if i == numberOfSongs {
-                    completionHandler(songs: songs)
+                if let actualPlaylist = playlist, actualItems = actualPlaylist.items {
+                    if actualItems.count == 0 {
+                        SongScraper.playlistHasSongs = false
+                        print("Empty playlist, loading another playlist")
+                        return
                     }
+                    
+                    for _ in 1...numberOfSongs {
+                        let random = Int(arc4random_uniform(UInt32(actualItems.count)))
+                        songs.append(actualPlaylist.items[random] as! SPTPartialTrack)
+                    }
+                    
+                    completionHandler(songs: songs)
+                }
+                else {
+                    print("Returned a nil playlist, loading another playlist")
+                    SongScraper.playlistHasSongs = false
+                    return
                 }
             }
         }

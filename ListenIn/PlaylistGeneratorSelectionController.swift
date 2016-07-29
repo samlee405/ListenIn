@@ -36,6 +36,9 @@ class PlaylistGeneratorSelectionController: UIViewController {
         self.performSegueWithIdentifier("addNewFollowersSegue", sender: self)
     }
     
+    @IBAction func unwindToMainScreen(segue: UIStoryboardSegue) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
