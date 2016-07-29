@@ -12,4 +12,7 @@ class FollowingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var followedUser: UILabel!
     
+    @IBAction func unfollowUser(sender: AnyObject) {
+        
+    }
 }

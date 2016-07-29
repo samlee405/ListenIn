@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 
-class AddFollowersTableViewController: UITableViewController {
+class AddFollowersTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var currentSession: SPTSession?
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
@@ -18,8 +18,13 @@ class AddFollowersTableViewController: UITableViewController {
     var usersNotFollowingDisplayName: [String] = []
     var isFollowed: Bool = false
     
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         getUnfollowedUsers()
     }
     
@@ -67,7 +72,6 @@ class AddFollowersTableViewController: UITableViewController {
     
     func displayUsernames() {
         for entry in self.usersNotFollowing {
-            print(entry)
             let username = entry.componentsSeparatedByString(":").last!
             SPTUser.requestUser(username, withAccessToken: SPTAuth.defaultInstance().session.accessToken) { (error: NSError!, data: AnyObject!) in
                 if let error = error {
@@ -80,17 +84,15 @@ class AddFollowersTableViewController: UITableViewController {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usersNotFollowingDisplayName.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        // Make sure to change userURI
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AddFollowersTableViewCell", forIndexPath: indexPath) as! AddFollowersTableViewCell
         
