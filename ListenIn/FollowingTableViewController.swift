@@ -65,6 +65,8 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
         
         let someUser = followingArrayDisplayName[indexPath.row]
         cell.followedUser.text = String(someUser)
+        cell.index = indexPath.row
+        cell.currentUser = followingArray[indexPath.row]
         
         return cell
     }
