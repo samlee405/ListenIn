@@ -98,6 +98,7 @@ class AddFollowersTableViewController: UIViewController, UITableViewDelegate, UI
         
         let someUser = usersNotFollowingDisplayName[indexPath.row]
         cell.someUser.text = String(someUser)
+        cell.currentUser = usersNotFollowing[indexPath.row]
         cell.userURI = usersNotFollowing[indexPath.row]
         
         return cell

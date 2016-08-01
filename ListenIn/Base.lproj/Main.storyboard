@@ -302,9 +302,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAk-FB-YtO">
-                                                    <rect key="frame" x="535" y="7" width="57" height="30"/>
+                                                    <rect key="frame" x="506" y="7" width="86" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="57" id="Fof-9U-NBF"/>
+                                                        <constraint firstAttribute="width" constant="86" id="Fof-9U-NBF"/>
                                                     </constraints>
                                                     <state key="normal" title="Follow"/>
                                                     <connections>
@@ -320,6 +320,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="followButton" destination="AAk-FB-YtO" id="tRR-9S-PGq"/>
                                             <outlet property="someUser" destination="NnN-4M-guG" id="e6s-Co-a4U"/>
                                         </connections>
                                     </tableViewCell>
@@ -437,6 +438,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="followButton" destination="MV4-mD-XrP" id="dCF-9Z-6v7"/>
                                             <outlet property="followedUser" destination="Ftt-D1-xkc" id="eeq-a0-c46"/>
                                         </connections>
                                     </tableViewCell>
