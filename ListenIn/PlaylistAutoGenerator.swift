@@ -18,17 +18,24 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
     var data: [SPTPartialTrack] = []
     let currentUserID = PlaylistGeneratorSelectionController.currentUserID
     let currentUserURI = PlaylistGeneratorSelectionController.currentUserURI.componentsSeparatedByString(":").last!
+    var uploadPlaylistBool = true
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var uploadPlaylistButton: UIButton!
     
     @IBAction func uploadPlaylist(sender: AnyObject) {
-        SPTPlaylistList.createPlaylistWithName("Your ListenIn Playlist", publicFlag: true, session: currentSession) { (error: NSError!, data: SPTPlaylistSnapshot!) in
-            data.addTracksToPlaylist(self.data, withSession: self.currentSession, callback: { (error: NSError!) in
-                if let someError = error {
-                    print("Error uploading playlist")
-                    print(someError)
-                }
-            })
+        if uploadPlaylistBool {
+            SPTPlaylistList.createPlaylistWithName("Your ListenIn Playlist", publicFlag: true, session: currentSession) { (error: NSError!, data: SPTPlaylistSnapshot!) in
+                data.addTracksToPlaylist(self.data, withSession: self.currentSession, callback: { (error: NSError!) in
+                    if let someError = error {
+                        print("Error uploading playlist")
+                        print(someError)
+                    }
+                })
+            }
+            
+            self.uploadPlaylistBool = false
+            self.uploadPlaylistButton.setTitle("Playlist uploaded", forState: .Normal)
         }
     }
     
