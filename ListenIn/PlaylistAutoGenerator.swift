@@ -10,10 +10,9 @@ import Foundation
 import UIKit
 import FirebaseDatabase
 
-class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewDataSource, SPTAudioStreamingDelegate {
+class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var currentSession: SPTSession?
-    static var player: SPTAudioStreamingController = SPTAudioStreamingController.sharedInstance()
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
     var followedUsers: [String] = []
     var data: [SPTPartialTrack] = []
@@ -46,7 +45,6 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         getFollowers()
-        loginWithSession(currentSession!)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -78,7 +76,6 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
                     SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator") { (songs) in
                         self.data = self.data + songs
                         self.tableView.reloadData()
-                        print("there are \(self.data.count) songs")
                     }
                 }
             }
@@ -88,26 +85,8 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func loginWithSession(session: SPTSession) {
-        PlaylistAutoGenerator.player.delegate = self
-        do {
-            try PlaylistAutoGenerator.player.startWithClientId("be6510d70bda4a288b2725ff06c4b2e3")
-        }
-        catch let error {
-            print(error)
-        }
-        
-        PlaylistAutoGenerator.player.loginWithAccessToken(session.accessToken)
-    }
-    
     static func audioStreamingDidLogin(audioStreaming: SPTAudioStreamingController, uri: NSURL) {
-//        self.player.playURI(uri) { (error: NSError!) in
-//            if error != nil {
-//                print("Failed to play: \(error!)")
-//                return
-//            }
-//        }
-        self.player.playURI(uri) { (error: NSError!) in
+        ViewController.player.playURI(uri) { (error: NSError!) in
             if error != nil {
                 print("Failed to play: \(error!)")
                 return

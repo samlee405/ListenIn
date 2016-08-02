@@ -15,22 +15,22 @@ class PlaylistTableViewCell: UITableViewCell {
     @IBOutlet weak var songTitle: UILabel!
 
     @IBAction func playSong(sender: AnyObject) {
-        if PlaylistAutoGenerator.player.isPlaying {
-            if PlaylistAutoGenerator.player.currentTrackURI == songURI {
-                PlaylistAutoGenerator.player.setIsPlaying(false, callback: { (error: NSError!) in
+        if ViewController.player.isPlaying {
+            if ViewController.player.currentTrackURI == songURI {
+                ViewController.player.setIsPlaying(false, callback: { (error: NSError!) in
                 })
             }
             else {
-                PlaylistAutoGenerator.audioStreamingDidLogin(PlaylistAutoGenerator.player, uri: songURI!)
+                PlaylistAutoGenerator.audioStreamingDidLogin(ViewController.player, uri: songURI!)
             }
         }
         else {
-            if PlaylistAutoGenerator.player.currentTrackURI == songURI {
-                PlaylistAutoGenerator.player.setIsPlaying(true, callback: { (error: NSError!) in
+            if ViewController.player.currentTrackURI == songURI {
+                ViewController.player.setIsPlaying(true, callback: { (error: NSError!) in
                 })
             }
             else {
-                PlaylistAutoGenerator.audioStreamingDidLogin(PlaylistAutoGenerator.player, uri: songURI!)
+                PlaylistAutoGenerator.audioStreamingDidLogin(ViewController.player, uri: songURI!)
             }
         }
     }
