@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 import FirebaseDatabase
 
-class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewDataSource, SPTAudioStreamingDelegate {
     
     var currentSession: SPTSession?
+    static var player: SPTAudioStreamingController = SPTAudioStreamingController.sharedInstance()
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
     var followedUsers: [String] = []
     var data: [SPTPartialTrack] = []
@@ -37,11 +38,15 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
             self.uploadPlaylistBool = false
             self.uploadPlaylistButton.setTitle("Playlist uploaded", forState: .Normal)
         }
+        else {
+            print("Playlist has been uploaded")
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getFollowers()
+        loginWithSession(currentSession!)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -83,6 +88,33 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    func loginWithSession(session: SPTSession) {
+        PlaylistAutoGenerator.player.delegate = self
+        do {
+            try PlaylistAutoGenerator.player.startWithClientId("be6510d70bda4a288b2725ff06c4b2e3")
+        }
+        catch let error {
+            print(error)
+        }
+        
+        PlaylistAutoGenerator.player.loginWithAccessToken(session.accessToken)
+    }
+    
+    static func audioStreamingDidLogin(audioStreaming: SPTAudioStreamingController, uri: NSURL) {
+//        self.player.playURI(uri) { (error: NSError!) in
+//            if error != nil {
+//                print("Failed to play: \(error!)")
+//                return
+//            }
+//        }
+        self.player.playURI(uri) { (error: NSError!) in
+            if error != nil {
+                print("Failed to play: \(error!)")
+                return
+            }
+        }
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -97,6 +129,7 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
 
         let song = data[indexPath.row].name
         cell.songTitle.text = String(song)
+        cell.songURI = data[indexPath.row].playableUri
         
         return cell
     }

@@ -22,7 +22,7 @@ class ViewController: UIViewController, SPTAuthViewDelegate {
         
         // Pass through authentication details
         spotifyAuthenticator.clientID = kClientID
-        spotifyAuthenticator.requestedScopes = [SPTAuthPlaylistModifyPublicScope, SPTAuthUserFollowReadScope, SPTAuthUserLibraryReadScope]
+        spotifyAuthenticator.requestedScopes = [SPTAuthPlaylistModifyPublicScope, SPTAuthUserFollowReadScope, SPTAuthUserLibraryReadScope, SPTAuthStreamingScope]
         spotifyAuthenticator.redirectURL = NSURL(string: kCallbackURL)
         
         // Create and prepare to open the Spotify log in controller
