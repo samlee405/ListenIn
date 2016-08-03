@@ -70,17 +70,23 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
                 SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator") { (songs) in
                     self.data = self.data + songs
                     self.tableView.reloadData()
-                    print("there are \(self.data.count) songs")
-                }
-                while SongScraper.playlistHasSongs == false {
-                    SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator") { (songs) in
-                        self.data = self.data + songs
-                        self.tableView.reloadData()
-                    }
+                    
+                    self.recursiveCallForSongs(username, session: self.currentSession!, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator")
                 }
             }
             else {
                 print("Did not load session")
+            }
+        }
+    }
+    
+    func recursiveCallForSongs(username: String, session: SPTSession, numberOfSongs: Int, locationOfCall: String) {
+        while SongScraper.playlistHasSongs == false {
+            SongScraper.getSongsFromPlaylist(username, session: session, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator") { (songs) in
+                self.data = self.data + songs
+                print("Additional songs loaded")
+                self.tableView.reloadData()
+                self.recursiveCallForSongs(username, session: session, numberOfSongs: numberOfSongs, locationOfCall: locationOfCall)
             }
         }
     }
