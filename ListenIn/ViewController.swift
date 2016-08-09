@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ViewController: UIViewController, SPTAuthViewDelegate, SPTAudioStreamingDelegate {
     
@@ -20,21 +21,20 @@ class ViewController: UIViewController, SPTAuthViewDelegate, SPTAudioStreamingDe
     @IBOutlet weak var logInButton: UIButton!
     
     @IBAction func signIntoSpotify(sender: AnyObject) {
-        
         // Pass through authentication details
         spotifyAuthenticator.clientID = kClientID
         spotifyAuthenticator.requestedScopes = [SPTAuthPlaylistModifyPublicScope, SPTAuthUserFollowReadScope, SPTAuthUserLibraryReadScope, SPTAuthStreamingScope]
         spotifyAuthenticator.redirectURL = NSURL(string: kCallbackURL)
         
+        
         // Create and prepare to open the Spotify log in controller
         let spotifyAuthenticationViewController = SPTAuthViewController.authenticationViewController()
         spotifyAuthenticationViewController.delegate = self
-
         spotifyAuthenticationViewController.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
-        spotifyAuthenticationViewController.definesPresentationContext = true
-        
-        presentViewController(spotifyAuthenticationViewController, animated: false, completion: nil)
-        
+        spotifyAuthenticationViewController.modalTransitionStyle = .CrossDissolve
+        self.modalPresentationStyle = .CurrentContext
+        self.definesPresentationContext = true
+        self.presentViewController(spotifyAuthenticationViewController, animated: true, completion: nil)
     }
     
     // If login succeeds:
@@ -42,7 +42,12 @@ class ViewController: UIViewController, SPTAuthViewDelegate, SPTAudioStreamingDe
         
         self.loginSession = session
         self.loginWithSession(self.loginSession)
-        self.performSegueWithIdentifier("PlaylistGeneratorSelectionSegue", sender: self)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.requestSpotifyCurrentUser({
+            let vc = self.storyboard!.instantiateViewControllerWithIdentifier("mainScreen")
+            appDelegate.window!.rootViewController = vc
+        })
     }
     
     // If login fails:
@@ -66,18 +71,9 @@ class ViewController: UIViewController, SPTAuthViewDelegate, SPTAudioStreamingDe
         
         ViewController.player.loginWithAccessToken(session.accessToken)
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "PlaylistGeneratorSelectionSegue" {
-            // Send current Spotify session
-            let destinationViewController: PlaylistGeneratorSelectionController = segue.destinationViewController as! PlaylistGeneratorSelectionController
-            destinationViewController.currentSession = loginSession
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         logInButton.layer.cornerRadius = 25
     }
 

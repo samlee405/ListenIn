@@ -11,12 +11,25 @@ import FirebaseDatabase
 
 class FollowingTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var currentSession: SPTSession?
+    lazy var currentSession: SPTSession? = {
+        return SPTAuth.defaultInstance().session ?? nil
+    }()
+    
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
     var followingArray: [String] = []
     var followingArrayDisplayName: [String] = []
     
+    lazy var currentUserURI: String = {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        return appDelegate.currentUserURI
+    }()
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBAction func findNewFollowers(sender: AnyObject) {
+        self.performSegueWithIdentifier("addNewFollowersSegue", sender: self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +37,7 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         
         // Find all the people you're following
-        ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        ref.child("follow").child(self.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
 
             for entry in snapshot.children {
                 self.followingArray.append(entry.value)
@@ -48,6 +61,18 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
                 self.followingArrayDisplayName.append(data.displayName)
                 self.tableView.reloadData()
             }
+        }
+    }
+    
+    @IBAction func unwindToFollowers(segue: UIStoryboardSegue) {
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "addNewFollowersSegue" {
+            // Send current Spotify session
+            let destinationViewController: AddFollowersTableViewController = segue.destinationViewController as! AddFollowersTableViewController
+            destinationViewController.currentSession = currentSession
         }
     }
     

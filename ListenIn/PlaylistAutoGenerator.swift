@@ -12,17 +12,30 @@ import FirebaseDatabase
 
 class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var currentSession: SPTSession?
+    lazy var currentSession: SPTSession? = {
+        return SPTAuth.defaultInstance().session ?? nil
+    }()
+    
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
     var followedUsers: [String] = []
     var data: [SPTPartialTrack] = []
-    let currentUserID = PlaylistGeneratorSelectionController.currentUserID
-    let currentUserURI = PlaylistGeneratorSelectionController.currentUserURI.componentsSeparatedByString(":").last!
+    
+    lazy var currentUserURI: String = {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+        return appDelegate.currentUserURI
+    }()
+    
     var uploadPlaylistBool = true
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var uploadPlaylistButton: UIButton!
     
+    @IBAction func refreshPlaylist(sender: AnyObject) {
+        self.data = []
+        self.buildPlaylist()
+    }
+
     @IBAction func uploadPlaylist(sender: AnyObject) {
         if uploadPlaylistBool {
             SPTPlaylistList.createPlaylistWithName("Your ListenIn Playlist", publicFlag: true, session: currentSession) { (error: NSError!, data: SPTPlaylistSnapshot!) in
@@ -51,7 +64,7 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func getFollowers() {
-        ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        ref.child("follow").child(self.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             for entry in snapshot.children {
                 self.followedUsers.append(entry.value)
             }
@@ -67,11 +80,11 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
             let username = item.componentsSeparatedByString(":").last!
             
             if let unwrappedSession = currentSession {
-                SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator") { (songs) in
+                SongScraper.getSongsFromPlaylist(username, session: unwrappedSession, numberOfSongs: 5, locationOfCall: "PlaylistAutoGenerator") { (songs) in
                     self.data = self.data + songs
                     self.tableView.reloadData()
                     
-                    self.recursiveCallForSongs(username, session: self.currentSession!, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator")
+                    self.recursiveCallForSongs(username, session: self.currentSession!, numberOfSongs: 5, locationOfCall: "PlaylistAutoGenerator")
                 }
             }
             else {
@@ -82,7 +95,7 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
     
     func recursiveCallForSongs(username: String, session: SPTSession, numberOfSongs: Int, locationOfCall: String) {
         while SongScraper.playlistHasSongs == false {
-            SongScraper.getSongsFromPlaylist(username, session: session, numberOfSongs: 4, locationOfCall: "PlaylistAutoGenerator") { (songs) in
+            SongScraper.getSongsFromPlaylist(username, session: session, numberOfSongs: 5, locationOfCall: "PlaylistAutoGenerator") { (songs) in
                 self.data = self.data + songs
                 print("Additional songs loaded")
                 self.tableView.reloadData()

@@ -11,12 +11,20 @@ import FirebaseDatabase
 
 class AddFollowersTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var currentSession: SPTSession?
+    lazy var currentSession: SPTSession? = {
+        return SPTAuth.defaultInstance().session ?? nil
+    }()
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
     var usersImFollowing: [String] = []
     var usersNotFollowing: [String] = []
     var usersNotFollowingDisplayName: [String] = []
     var isFollowed: Bool = false
+    
+    lazy var currentUserURI: String = {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        return appDelegate.currentUserURI
+    }()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,7 +37,7 @@ class AddFollowersTableViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func getUnfollowedUsers() {
-        ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        ref.child("follow").child(self.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             self.getFollowedUsersForUser(snapshot)
             self.createListOfUnfollowedUsers()
         }) { (error) in

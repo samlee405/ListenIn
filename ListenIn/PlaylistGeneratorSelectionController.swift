@@ -42,8 +42,6 @@ class PlaylistGeneratorSelectionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dividerBar.layer.cornerRadius = 5
-        
         SPTUser.requestCurrentUserWithAccessToken(SPTAuth.defaultInstance().session.accessToken) { (error: NSError!, data: AnyObject!) in
             PlaylistGeneratorSelectionController.currentUserURI = String(data.uri)
             PlaylistGeneratorSelectionController.currentUserID = data.displayName

@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  ListenIn
@@ -8,15 +9,22 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var currentUserURI: String!
+    var currentUserID: String!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FIRApp.configure()
+        let backgroundImageView = UIImageView(image: UIImage(named: "Login Screen Background"))
+        backgroundImageView.frame = CGRectMake(0, 0, window!.frame.size.width, window!.frame.size.height)
+        window?.addSubview(backgroundImageView)
+
         return true
     }
 
@@ -42,6 +50,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func requestSpotifyCurrentUser(callback: (() -> Void)?) {
+        SPTUser.requestCurrentUserWithAccessToken(SPTAuth.defaultInstance().session.accessToken) { (error: NSError!, data: AnyObject!) in
+            self.currentUserURI = String(data.uri)
+            self.currentUserID = data.displayName
+            
+            let ref: FIRDatabaseReference = FIRDatabase.database().reference()
+            ref.child("users").child(self.currentUserURI!).child("username").setValue(self.currentUserID)
+            
+            if let callback = callback {
+                callback()
+            }
+        }
+    }
 }
 
