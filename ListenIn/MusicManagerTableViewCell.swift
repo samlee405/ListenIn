@@ -10,10 +10,7 @@ import Foundation
 
 class MusicManagerTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var playlistName: UIButton!
+    var index = 0
     
-    @IBAction func openPlaylist(sender: AnyObject) {
-        
-    }
-    
+    @IBOutlet weak var playlistName: UILabel!
 }

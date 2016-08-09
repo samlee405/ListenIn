@@ -21,6 +21,7 @@ class MusicManager: UIViewController, UITableViewDelegate, UITableViewDataSource
     }()
     
     var playlistList: [SPTPartialPlaylist] = []
+    var valueToPass: SPTPartialPlaylist!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -46,6 +47,25 @@ class MusicManager: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+//        let indexPath = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! MusicManagerTableViewCell
+        valueToPass = playlistList[currentCell.index]
+        
+        performSegueWithIdentifier("showMusicForPlaylist", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showMusicForPlaylist" {
+            let viewController = segue.destinationViewController as! PlaylistViewer
+            viewController.playlistToLoad = valueToPass
+        }
+    }
+    
+    @IBAction func unwindToPlaylistList(segue: UIStoryboardSegue) {
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -58,7 +78,8 @@ class MusicManager: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         let cell = tableView.dequeueReusableCellWithIdentifier("MusicManagerTableViewCell", forIndexPath: indexPath) as! MusicManagerTableViewCell
         
-        cell.playlistName.setTitle(String(self.playlistList[indexPath.row].name), forState: .Normal)
+        cell.index = indexPath.row
+        cell.playlistName.text = self.playlistList[indexPath.row].name
         
         return cell
     }

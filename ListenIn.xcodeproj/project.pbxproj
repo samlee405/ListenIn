@@ -19,6 +19,8 @@
 		EF622DC91D3707F500205419 /* PlaylistGeneratorSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF622DC81D3707F500205419 /* PlaylistGeneratorSelectionController.swift */; };
 		EF70BCD11D59378400516CC5 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF70BCD01D59378400516CC5 /* MusicManager.swift */; };
 		EF70BCD31D593A9800516CC5 /* MusicManagerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF70BCD21D593A9800516CC5 /* MusicManagerTableViewCell.swift */; };
+		EF70BCD51D5A56C700516CC5 /* PlaylistViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF70BCD41D5A56C700516CC5 /* PlaylistViewer.swift */; };
+		EF70BCD71D5A58FC00516CC5 /* PlaylistViewerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF70BCD61D5A58FC00516CC5 /* PlaylistViewerTableViewCell.swift */; };
 		EFDE0A901D359BC1008748F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0A8F1D359BC1008748F2 /* AppDelegate.swift */; };
 		EFDE0A921D359BC1008748F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE0A911D359BC1008748F2 /* ViewController.swift */; };
 		EFDE0A971D359BC1008748F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFDE0A961D359BC1008748F2 /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		EF622DC81D3707F500205419 /* PlaylistGeneratorSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistGeneratorSelectionController.swift; sourceTree = "<group>"; };
 		EF70BCD01D59378400516CC5 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		EF70BCD21D593A9800516CC5 /* MusicManagerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManagerTableViewCell.swift; sourceTree = "<group>"; };
+		EF70BCD41D5A56C700516CC5 /* PlaylistViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewer.swift; sourceTree = "<group>"; };
+		EF70BCD61D5A58FC00516CC5 /* PlaylistViewerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewerTableViewCell.swift; sourceTree = "<group>"; };
 		EFDE0A8C1D359BC1008748F2 /* ListenIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListenIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFDE0A8F1D359BC1008748F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFDE0A911D359BC1008748F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -135,12 +139,14 @@
 				EF5B8C6E1D47CEB90095FC4F /* AddFollowersTableViewCell.swift */,
 				EF70BCD01D59378400516CC5 /* MusicManager.swift */,
 				EF70BCD21D593A9800516CC5 /* MusicManagerTableViewCell.swift */,
+				EF70BCD41D5A56C700516CC5 /* PlaylistViewer.swift */,
+				EF70BCD61D5A58FC00516CC5 /* PlaylistViewerTableViewCell.swift */,
+				EF622DC81D3707F500205419 /* PlaylistGeneratorSelectionController.swift */,
 				EF36DEDA1D52B2BD00233FDC /* Main.storyboard */,
 				EFDE0A961D359BC1008748F2 /* Assets.xcassets */,
 				EFDE0A981D359BC1008748F2 /* LaunchScreen.storyboard */,
 				EFDE0A9B1D359BC1008748F2 /* Info.plist */,
 				EFFDD9441D42884700768DF2 /* GoogleService-Info.plist */,
-				EF622DC81D3707F500205419 /* PlaylistGeneratorSelectionController.swift */,
 				EFDE0AA11D359C95008748F2 /* Frameworks */,
 				EF622DC51D37079500205419 /* Support Files */,
 			);
@@ -284,8 +290,10 @@
 				EF2B4FD51D46AC7100937AC5 /* FollowingTableViewController.swift in Sources */,
 				EF2B4FD71D46AC8F00937AC5 /* FollowingTableViewCell.swift in Sources */,
 				EF70BCD11D59378400516CC5 /* MusicManager.swift in Sources */,
+				EF70BCD71D5A58FC00516CC5 /* PlaylistViewerTableViewCell.swift in Sources */,
 				EF70BCD31D593A9800516CC5 /* MusicManagerTableViewCell.swift in Sources */,
 				EF09B45A1D3D51E4008251A2 /* PlaylistAutoGenerator.swift in Sources */,
+				EF70BCD51D5A56C700516CC5 /* PlaylistViewer.swift in Sources */,
 				EF5B8C6F1D47CEB90095FC4F /* AddFollowersTableViewCell.swift in Sources */,
 				EFDE0A901D359BC1008748F2 /* AppDelegate.swift in Sources */,
 				EF5B8C6D1D47CEA00095FC4F /* AddFollowersTableViewController.swift in Sources */,

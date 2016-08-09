@@ -13,6 +13,7 @@ class PlaylistTableViewCell: UITableViewCell {
     var songURI: NSURL?
     
     @IBOutlet weak var songTitle: UILabel!
+    @IBOutlet weak var artistTitle: UILabel!
 
     @IBAction func playSong(sender: AnyObject) {
         if ViewController.player.isPlaying {

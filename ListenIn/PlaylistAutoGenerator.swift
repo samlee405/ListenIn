@@ -125,8 +125,10 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistTableViewCell", forIndexPath: indexPath) as! PlaylistTableViewCell
 
-        let song = data[indexPath.row].name
-        cell.songTitle.text = String(song)
+        let song = data[indexPath.row]
+        let artist = song.artists.first as! SPTPartialArtist
+        cell.songTitle.text = String(song.name)
+        cell.artistTitle.text = String(artist.name)
         cell.songURI = data[indexPath.row].playableUri
         
         return cell
