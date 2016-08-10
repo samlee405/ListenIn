@@ -119,7 +119,6 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .Normal, title: "delete") { action, index in
-            print("delete button tapped")
             self.data.removeAtIndex(indexPath.row)
             self.tableView.reloadData()
         }
