@@ -69,6 +69,7 @@ class PlaylistViewer: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cell.songTitle.text = listOfSongs[indexPath.row].name
         cell.artistTitle.text = listOfSongs[indexPath.row].artists.first!.name
+        cell.songURI = listOfSongs[indexPath.row].playableUri
         
         return cell
     }

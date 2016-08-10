@@ -80,6 +80,7 @@ class MusicManager: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         cell.index = indexPath.row
         cell.playlistName.text = self.playlistList[indexPath.row].name
+        cell.playlistURI = self.playlistList[indexPath.row].playableUri
         
         return cell
     }

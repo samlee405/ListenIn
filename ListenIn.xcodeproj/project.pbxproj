@@ -13,6 +13,7 @@
 		EF2B4FD51D46AC7100937AC5 /* FollowingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2B4FD41D46AC7100937AC5 /* FollowingTableViewController.swift */; };
 		EF2B4FD71D46AC8F00937AC5 /* FollowingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2B4FD61D46AC8F00937AC5 /* FollowingTableViewCell.swift */; };
 		EF36DEDB1D52B2BD00233FDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF36DEDA1D52B2BD00233FDC /* Main.storyboard */; };
+		EF43A06C1D5B9A8000D645D0 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43A06B1D5B9A8000D645D0 /* MyTabBarController.swift */; };
 		EF5B8C6D1D47CEA00095FC4F /* AddFollowersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5B8C6C1D47CEA00095FC4F /* AddFollowersTableViewController.swift */; };
 		EF5B8C6F1D47CEB90095FC4F /* AddFollowersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5B8C6E1D47CEB90095FC4F /* AddFollowersTableViewCell.swift */; };
 		EF622DC01D36BC6700205419 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF622DBF1D36BC6700205419 /* Spotify.framework */; };
@@ -39,6 +40,7 @@
 		EF2B4FD41D46AC7100937AC5 /* FollowingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewController.swift; sourceTree = "<group>"; };
 		EF2B4FD61D46AC8F00937AC5 /* FollowingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewCell.swift; sourceTree = "<group>"; };
 		EF36DEDA1D52B2BD00233FDC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		EF43A06B1D5B9A8000D645D0 /* MyTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		EF5B8C6C1D47CEA00095FC4F /* AddFollowersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowersTableViewController.swift; sourceTree = "<group>"; };
 		EF5B8C6E1D47CEB90095FC4F /* AddFollowersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowersTableViewCell.swift; sourceTree = "<group>"; };
 		EF622DBF1D36BC6700205419 /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Spotify.framework; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				EF09B4561D3D4546008251A2 /* Helpers */,
 				EFDE0A8F1D359BC1008748F2 /* AppDelegate.swift */,
 				EFDE0A911D359BC1008748F2 /* ViewController.swift */,
+				EF43A06B1D5B9A8000D645D0 /* MyTabBarController.swift */,
 				EF09B4591D3D51E4008251A2 /* PlaylistAutoGenerator.swift */,
 				EFF387661D3EE89A003BE237 /* PlaylistTableViewCell.swift */,
 				EF2B4FD41D46AC7100937AC5 /* FollowingTableViewController.swift */,
@@ -299,6 +302,7 @@
 				EF5B8C6D1D47CEA00095FC4F /* AddFollowersTableViewController.swift in Sources */,
 				EF09B4581D3D45C3008251A2 /* SongScraper.swift in Sources */,
 				EFF387671D3EE89A003BE237 /* PlaylistTableViewCell.swift in Sources */,
+				EF43A06C1D5B9A8000D645D0 /* MyTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

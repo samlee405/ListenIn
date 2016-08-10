@@ -57,10 +57,10 @@
             </objects>
             <point key="canvasLocation" x="513" y="-684"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--My Tab Bar Controller-->
         <scene sceneID="7kB-Ky-WDA">
             <objects>
-                <tabBarController storyboardIdentifier="mainScreen" id="jF9-eo-YPE" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainScreen" id="jF9-eo-YPE" customClass="MyTabBarController" customModule="ListenIn" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="kwD-Ru-NYo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -108,7 +108,11 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbk-Xd-DF3">
                                                     <rect key="frame" x="8" y="7" width="46" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Play"/>
+                                                    <connections>
+                                                        <action selector="playPlaylist:" destination="Cdg-dV-d2C" eventType="touchUpInside" id="CcO-Kl-fDY"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="playlistName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00H-MQ-6Os">
                                                     <rect key="frame" x="62" y="11" width="206" height="21"/>
@@ -192,6 +196,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <state key="normal" title="Play"/>
+                                                    <connections>
+                                                        <action selector="playSong:" destination="WLK-OW-xFF" eventType="touchUpInside" id="fs4-EW-7pm"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="songTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGh-8E-8pe">
                                                     <rect key="frame" x="46" y="1" width="200" height="21"/>
@@ -353,7 +360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OcM-tG-9qq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1456" y="1137"/>
+            <point key="canvasLocation" x="1330" y="99"/>
         </scene>
         <!--Build a playlist-->
         <scene sceneID="LL3-Tc-HI9">

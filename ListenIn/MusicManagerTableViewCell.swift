@@ -11,6 +11,16 @@ import Foundation
 class MusicManagerTableViewCell: UITableViewCell {
     
     var index = 0
+    var playlistURI: NSURL!
     
     @IBOutlet weak var playlistName: UILabel!
+    
+    @IBAction func playPlaylist(sender: AnyObject) {
+        if ViewController.player.isPlaying {
+            PlaylistAutoGenerator.audioStreamingDidLogin(ViewController.player, uri: playlistURI!)
+        }
+        else {
+            PlaylistAutoGenerator.audioStreamingDidLogin(ViewController.player, uri: playlistURI!)
+        }
+    }
 }
