@@ -1,46 +1,55 @@
 //
-//  FollowingTableViewController.swift
+//  ConstructPlaylist.swift
 //  ListenIn
 //
-//  Created by Sam Lee on 7/25/16.
+//  Created by Sam Lee on 8/10/16.
 //  Copyright © 2016 Sam Lee. All rights reserved.
 //
 
 import Foundation
 import FirebaseDatabase
 
-class FollowingTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConstructPlaylist: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
-    var followingArray: [String] = []
-    var followingArrayDisplayName: [String] = []
-    
-    lazy var currentSession: SPTSession? = {
-        return SPTAuth.defaultInstance().session ?? nil
-    }()
+    var followedUsers: [String] = []
+    var followedUsersDisplayName: [String] = []
+    static var playlistsToBuildFrom: [NSURL] = []
+    var valueToPass: String!
     
     lazy var currentUserURI: String = {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         return appDelegate.currentUserURI
     }()
-    
+
+    @IBOutlet weak var numberOfPlaylists: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    @IBAction func findNewFollowers(sender: AnyObject) {
-        self.performSegueWithIdentifier("addNewFollowersSegue", sender: self)
+    @IBAction func buildPlaylist(sender: AnyObject) {
     }
-
+    
+    @IBAction func unwindToFollowedUsers(segue: UIStoryboardSegue) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         
-        // Find all the people you're following
+        getFollowedUsers()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        numberOfPlaylists.text = "\(ConstructPlaylist.playlistsToBuildFrom.count) playlists selected"
+    }
+    
+    func getFollowedUsers() {
         ref.child("follow").child(self.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-
+            
             for entry in snapshot.children {
-                self.followingArray.append(entry.value)
+                self.followedUsers.append(entry.value)
             }
             
             self.displayUsernames()
@@ -50,28 +59,30 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func displayUsernames() {
-        for entry in self.followingArray {
+        for entry in self.followedUsers {
             let username = entry.componentsSeparatedByString(":").last!
             SPTUser.requestUser(username, withAccessToken: SPTAuth.defaultInstance().session.accessToken) { (error: NSError!, data: AnyObject!) in
                 if let error = error {
                     print(error)
                     return
                 }
-                self.followingArrayDisplayName.append(data.displayName)
+                self.followedUsersDisplayName.append(data.displayName)
                 self.tableView.reloadData()
             }
         }
     }
     
-    @IBAction func unwindToFollowers(segue: UIStoryboardSegue) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! ConstructPlaylistTableViewCell
+        valueToPass = followedUsers[indexPath.row]
+        
+        performSegueWithIdentifier("showPlaylistForUser", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "addNewFollowersSegue" {
-            // Send current Spotify session
-            let destinationViewController: AddFollowersTableViewController = segue.destinationViewController as! AddFollowersTableViewController
-            destinationViewController.currentSession = currentSession
+        if segue.identifier == "showPlaylistForUser" {
+            let viewController = segue.destinationViewController as! AddPlaylistsFromUser
+            viewController.playlistForUser = valueToPass
         }
     }
     
@@ -80,18 +91,14 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return followingArrayDisplayName.count
+        return followedUsersDisplayName.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("FollowingTableViewCell", forIndexPath: indexPath) as! FollowingTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ConstructPlaylistTableViewCell", forIndexPath: indexPath) as! ConstructPlaylistTableViewCell
         
-        let someUser = followingArrayDisplayName[indexPath.row]
-        cell.followedUser.text = String(someUser)
-        cell.index = indexPath.row
-        cell.currentUser = followingArray[indexPath.row]
-        cell.userURI = followingArray[indexPath.row]
+        cell.followedUser.text = followedUsersDisplayName[indexPath.row]
         
         return cell
     }

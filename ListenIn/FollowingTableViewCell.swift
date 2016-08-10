@@ -11,6 +11,12 @@ import FirebaseDatabase
 
 class FollowingTableViewCell: UITableViewCell {
     
+    lazy var currentUserURI: String = {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        return appDelegate.currentUserURI
+    }()
+    
     var ref: FIRDatabaseReference = FIRDatabase.database().reference()
     var index: Int = 0
     var currentUser: String = ""
@@ -25,7 +31,7 @@ class FollowingTableViewCell: UITableViewCell {
         if ifFollowingBool {
             
             print("entered unfollow")
-            self.ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            self.ref.child("follow").child(self.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 
                 var isThere = false
                 var userToBeUnfollowed: String = ""
@@ -42,7 +48,7 @@ class FollowingTableViewCell: UITableViewCell {
                 if isThere {
                     print("The following user will be unfollowed " + userToBeUnfollowed)
                     
-                    self.ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).child(userToBeUnfollowed).removeValue()
+                    self.ref.child("follow").child(self.currentUserURI).child(userToBeUnfollowed).removeValue()
                 }
                 
             }) { (error) in
@@ -55,7 +61,7 @@ class FollowingTableViewCell: UITableViewCell {
         else {
             
             print("entered follow")
-            let userToFollow = self.ref.child("follow").child(PlaylistGeneratorSelectionController.currentUserURI).childByAutoId()
+            let userToFollow = self.ref.child("follow").child(self.currentUserURI).childByAutoId()
             userToFollow.setValue(self.userURI)
             
             self.ifFollowingBool = true

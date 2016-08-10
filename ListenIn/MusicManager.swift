@@ -48,8 +48,6 @@ class MusicManager: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-//        let indexPath = tableView.indexPathForSelectedRow
         let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! MusicManagerTableViewCell
         valueToPass = playlistList[currentCell.index]
         
