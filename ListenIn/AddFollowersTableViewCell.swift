@@ -29,7 +29,7 @@ class AddFollowersTableViewCell: UITableViewCell {
         if !ifFollowingBool {
             print("entered follow")
             let userToFollow = self.ref.child("follow").child(self.currentUserURI).childByAutoId()
-            userToFollow.setValue(userURI)
+            userToFollow.setValue(self.userURI)
             
             self.ifFollowingBool = true
             self.followButton.setTitle("Unfollow", forState: .Normal)

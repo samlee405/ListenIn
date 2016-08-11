@@ -27,7 +27,6 @@ class FollowingTableViewCell: UITableViewCell {
     @IBOutlet weak var followButton: UIButton!
     
     @IBAction func unfollowUser(sender: AnyObject) {
-        
         if ifFollowingBool {
             
             print("entered unfollow")

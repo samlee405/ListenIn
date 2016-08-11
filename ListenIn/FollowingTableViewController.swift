@@ -35,15 +35,22 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         // Find all the people you're following
+        self.followingArray = []
+        self.followingArrayDisplayName = []
         ref.child("follow").child(self.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-
+            
             for entry in snapshot.children {
                 self.followingArray.append(entry.value)
             }
             
-            self.displayUsernames()
+            self.displayUsernames(
+            )
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -92,6 +99,7 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
         cell.index = indexPath.row
         cell.currentUser = followingArray[indexPath.row]
         cell.userURI = followingArray[indexPath.row]
+        cell.followButton.setTitle("Unfollow", forState: .Normal)
         
         return cell
     }

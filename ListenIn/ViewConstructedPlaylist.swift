@@ -11,12 +11,35 @@ import Foundation
 class ViewConstructedPlaylist: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tracksForPlaylist: [SPTPartialTrack] = []
+    var uploadPlaylistBool = true
     
     lazy var currentSession: SPTSession? = {
         return SPTAuth.defaultInstance().session ?? nil
     }()
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var uploadPlaylistButton: UIButton!
+    
+    @IBAction func uploadToSpotify(sender: AnyObject) {
+        if uploadPlaylistBool {
+            SPTPlaylistList.createPlaylistWithName("Your ListenIn Playlist", publicFlag: true, session: currentSession) { (error: NSError!, data: SPTPlaylistSnapshot!) in
+                data.addTracksToPlaylist(self.tracksForPlaylist, withSession: self.currentSession, callback: { (error: NSError!) in
+                    if let someError = error {
+                        print("Error uploading playlist")
+                        print(someError)
+                    }
+                })
+            }
+            
+            self.uploadPlaylistBool = false
+            self.uploadPlaylistButton.setTitle("Playlist uploaded", forState: .Normal)
+            
+            ConstructPlaylist.playlistsToBuildFrom = []
+        }
+        else {
+            print("Playlist has been uploaded")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +82,23 @@ class ViewConstructedPlaylist: UIViewController, UITableViewDelegate, UITableVie
             }
         }
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .Normal, title: "delete") { action, index in
+            self.tracksForPlaylist.removeAtIndex(indexPath.row)
+            self.tableView.reloadData()
+        }
+        delete.backgroundColor = UIColor.redColor()
+        
+        return [delete]
+    }
  
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -69,11 +109,10 @@ class ViewConstructedPlaylist: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("ViewConstructedPlaylistTableViewCell", forIndexPath: indexPath) as! ViewConstructedPlaylistTableViewCell
         
-        cell.songName.text = self.tracksForPlaylist[indexPath.row].name
-        cell.artistName.text = self.tracksForPlaylist[indexPath.row].artists.first!.name
+        cell.songTitle.text = self.tracksForPlaylist[indexPath.row].name
+        cell.artistTitle.text = self.tracksForPlaylist[indexPath.row].artists.first!.name
         
         return cell
     }
