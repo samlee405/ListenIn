@@ -35,6 +35,7 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -93,6 +94,19 @@ class FollowingTableViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("FollowingTableViewCell", forIndexPath: indexPath) as! FollowingTableViewCell
+        
+        cell.contentView.backgroundColor = UIColor.whiteColor()
+        
+        let whiteRoundedView : UIView = UIView(frame: CGRectMake(5, 5, self.view.frame.size.width - 10, 35))
+        
+        whiteRoundedView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [56, 78, 119, 0.8])
+        whiteRoundedView.layer.masksToBounds = false
+        whiteRoundedView.layer.cornerRadius = 3.0
+        whiteRoundedView.layer.shadowOffset = CGSizeMake(0, 1)
+        whiteRoundedView.layer.shadowOpacity = 0.2
+        
+        cell.contentView.addSubview(whiteRoundedView)
+        cell.contentView.sendSubviewToBack(whiteRoundedView)
         
         let someUser = followingArrayDisplayName[indexPath.row]
         cell.followedUser.text = String(someUser)

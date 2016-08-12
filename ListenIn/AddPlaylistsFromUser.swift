@@ -23,6 +23,7 @@ class AddPlaylistsFromUser: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -52,6 +53,17 @@ class AddPlaylistsFromUser: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AddPlaylistsFromUserTableViewCell", forIndexPath: indexPath) as! AddPlaylistsFromUserTableViewCell
+        
+        let whiteRoundedView : UIView = UIView(frame: CGRectMake(5, 5, self.view.frame.size.width - 10, 35))
+        
+        whiteRoundedView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [56, 78, 119, 0.8])
+        whiteRoundedView.layer.masksToBounds = false
+        whiteRoundedView.layer.cornerRadius = 3.0
+        whiteRoundedView.layer.shadowOffset = CGSizeMake(0, 1)
+        whiteRoundedView.layer.shadowOpacity = 0.2
+        
+        cell.contentView.addSubview(whiteRoundedView)
+        cell.contentView.sendSubviewToBack(whiteRoundedView)
         
         cell.playlistName.text = self.playlistList[indexPath.row].name
         cell.playlistURI = self.playlistList[indexPath.row].uri

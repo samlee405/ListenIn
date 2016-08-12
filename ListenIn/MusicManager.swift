@@ -29,6 +29,7 @@ class MusicManager: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -75,6 +76,19 @@ class MusicManager: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("MusicManagerTableViewCell", forIndexPath: indexPath) as! MusicManagerTableViewCell
+        
+        cell.contentView.backgroundColor = UIColor.whiteColor()
+        
+        let whiteRoundedView : UIView = UIView(frame: CGRectMake(5, 5, self.view.frame.size.width - 10, 37.5))
+        
+        whiteRoundedView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [56, 78, 119, 0.8])
+        whiteRoundedView.layer.masksToBounds = false
+        whiteRoundedView.layer.cornerRadius = 3.0
+        whiteRoundedView.layer.shadowOffset = CGSizeMake(-1, 1)
+        whiteRoundedView.layer.shadowOpacity = 0.2
+        
+        cell.contentView.addSubview(whiteRoundedView)
+        cell.contentView.sendSubviewToBack(whiteRoundedView)
         
         cell.index = indexPath.row
         cell.playlistName.text = self.playlistList[indexPath.row].name

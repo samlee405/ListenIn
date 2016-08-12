@@ -28,10 +28,7 @@ class FollowingTableViewCell: UITableViewCell {
     
     @IBAction func unfollowUser(sender: AnyObject) {
         if ifFollowingBool {
-            
-            print("entered unfollow")
             self.ref.child("follow").child(self.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                
                 var isThere = false
                 var userToBeUnfollowed: String = ""
                 
@@ -49,7 +46,6 @@ class FollowingTableViewCell: UITableViewCell {
                     
                     self.ref.child("follow").child(self.currentUserURI).child(userToBeUnfollowed).removeValue()
                 }
-                
             }) { (error) in
                 print(error.localizedDescription)
             }
@@ -58,16 +54,11 @@ class FollowingTableViewCell: UITableViewCell {
             self.followButton.setTitle("Follow", forState: .Normal)
         }
         else {
-            
-            print("entered follow")
             let userToFollow = self.ref.child("follow").child(self.currentUserURI).childByAutoId()
             userToFollow.setValue(self.userURI)
             
             self.ifFollowingBool = true
             self.followButton.setTitle("Unfollow", forState: .Normal)
         }
-            
-            
-        
     }
 }

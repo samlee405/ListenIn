@@ -22,6 +22,7 @@ class PlaylistViewer: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         loadSongs()
     }
     
@@ -66,6 +67,19 @@ class PlaylistViewer: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistViewerTableViewCell", forIndexPath: indexPath) as! PlaylistViewerTableViewCell
+        
+        cell.contentView.backgroundColor = UIColor.whiteColor()
+        
+        let whiteRoundedView : UIView = UIView(frame: CGRectMake(5, 5, self.view.frame.size.width - 10, 37.5))
+        
+        whiteRoundedView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [56, 78, 119, 0.8])
+        whiteRoundedView.layer.masksToBounds = false
+        whiteRoundedView.layer.cornerRadius = 3.0
+        whiteRoundedView.layer.shadowOffset = CGSizeMake(-1, 1)
+        whiteRoundedView.layer.shadowOpacity = 0.2
+        
+        cell.contentView.addSubview(whiteRoundedView)
+        cell.contentView.sendSubviewToBack(whiteRoundedView)
         
         cell.songTitle.text = listOfSongs[indexPath.row].name
         cell.artistTitle.text = listOfSongs[indexPath.row].artists.first!.name

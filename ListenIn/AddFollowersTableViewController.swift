@@ -32,6 +32,7 @@ class AddFollowersTableViewController: UIViewController, UITableViewDelegate, UI
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         getUnfollowedUsers()
     }
@@ -103,6 +104,17 @@ class AddFollowersTableViewController: UIViewController, UITableViewDelegate, UI
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AddFollowersTableViewCell", forIndexPath: indexPath) as! AddFollowersTableViewCell
+        
+        let whiteRoundedView : UIView = UIView(frame: CGRectMake(5, 5, self.view.frame.size.width - 10, 35))
+        
+        whiteRoundedView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [56, 78, 119, 0.8])
+        whiteRoundedView.layer.masksToBounds = false
+        whiteRoundedView.layer.cornerRadius = 3.0
+        whiteRoundedView.layer.shadowOffset = CGSizeMake(0, 1)
+        whiteRoundedView.layer.shadowOpacity = 0.2
+        
+        cell.contentView.addSubview(whiteRoundedView)
+        cell.contentView.sendSubviewToBack(whiteRoundedView)
         
         let someUser = usersNotFollowingDisplayName[indexPath.row]
         cell.someUser.text = String(someUser)

@@ -27,7 +27,6 @@ class AddFollowersTableViewCell: UITableViewCell {
     
     @IBAction func followUser(sender: AnyObject) {
         if !ifFollowingBool {
-            print("entered follow")
             let userToFollow = self.ref.child("follow").child(self.currentUserURI).childByAutoId()
             userToFollow.setValue(self.userURI)
             
@@ -35,7 +34,6 @@ class AddFollowersTableViewCell: UITableViewCell {
             self.followButton.setTitle("Unfollow", forState: .Normal)
         }
         else {
-            print("entered unfollow")
             self.ref.child("follow").child(self.currentUserURI).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 
                 var isThere = false

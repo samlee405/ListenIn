@@ -61,6 +61,7 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
     func getFollowers() {
@@ -139,6 +140,19 @@ class PlaylistAutoGenerator: UIViewController, UITableViewDelegate, UITableViewD
         
         let cell = tableView.dequeueReusableCellWithIdentifier("PlaylistTableViewCell", forIndexPath: indexPath) as! PlaylistTableViewCell
 
+        cell.contentView.backgroundColor = UIColor.whiteColor()
+        
+        let whiteRoundedView : UIView = UIView(frame: CGRectMake(7.5, 5, self.view.frame.size.width - 10, 37.5))
+        
+        whiteRoundedView.layer.backgroundColor = CGColorCreate(CGColorSpaceCreateDeviceRGB(), [56, 78, 119, 0.8])
+        whiteRoundedView.layer.masksToBounds = false
+        whiteRoundedView.layer.cornerRadius = 3.0
+        whiteRoundedView.layer.shadowOffset = CGSizeMake(0, 1)
+        whiteRoundedView.layer.shadowOpacity = 0.2
+        
+        cell.contentView.addSubview(whiteRoundedView)
+        cell.contentView.sendSubviewToBack(whiteRoundedView)
+        
         let song = data[indexPath.row]
         let artist = song.artists.first as! SPTPartialArtist
         cell.songTitle.text = String(song.name)
